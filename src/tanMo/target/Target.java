@@ -3,6 +3,7 @@ package tanMo.target;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Target extends JFrame 
 {
@@ -17,21 +18,23 @@ public class Target extends JFrame
 	double screenX=0;
 	double screenY=0;
    	private static Target target=null;
+   	private JFrame frame=null;
 	
    	private Target()
    	{
+   		frame=new JFrame();
    		screenX=getToolkit().getScreenSize().getWidth();
    		screenY=getToolkit().getScreenSize().getHeight();
    		this.setBounds(x, y, (int)screenX, (int)screenY);
    		width=(int)screenX;
    		height=(int)screenY;
-   		this.setUndecorated(true);
-   		this.getContentPane().setLayout(null);
-   		this.setBackground(new Color(255, 255, 255, 0));
-   		this.getContentPane().setBackground(new Color(255,255,255,0));
-   		this.setAlwaysOnTop(true);
-   		this.setType(Type.UTILITY);
-   		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+   		frame.setUndecorated(true);
+   		frame.getContentPane().setLayout(null);
+   		frame.setBackground(new Color(255, 255, 255, 0));
+   		frame.getContentPane().setBackground(new Color(255,255,255,0));
+   		frame.setAlwaysOnTop(true);
+   		frame.setType(Type.UTILITY);
+   		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
    	}
    	
    	static public Target CreateTarget()
@@ -53,22 +56,32 @@ public class Target extends JFrame
    		y=newy;
    		width=newWidth;
    		height=newHeight;
-   		super.setBounds(newx, newy, newWidth, newHeight);
+   		frame.setBounds(newx, newy, newWidth, newHeight);
    	}
    
    	
    	public void refresh() 
    	{
-   		this.revalidate();
-   		this.repaint();
+   		frame.revalidate();
+   		frame.repaint();
 	}
    	
    	
     public void CloseTarget() 
    	{
    		target=null;
-   		this.setVisible(false);
-   		this.dispose();
+   		frame.setVisible(false);
+   		frame.dispose();
+	}
+    
+    public void addInPanel(JLabel l)
+    {
+    	frame.getContentPane().add(l);
+    }
+    
+    public void setVisible(boolean b) 
+    {
+    	frame.setVisible(b);
 	}
     
     public int getx() 

@@ -19,7 +19,6 @@ public class Gun
 	private int speed;
 	private int interval;
 	
-	
 	public Gun() 
 	{
 		direct=Direct.LEFT;
@@ -93,12 +92,14 @@ public class Gun
 		{
 			label.setFont(new Font("新細明體", Font.PLAIN, bullet.getSize()));
 		}
+		label.setForeground(bullet.getColor());
+		
 		int textwidth=label.getFontMetrics(label.getFont()).stringWidth(label.getText());//獲得字串長度
 		int startX= (direct==Direct.LEFT) ? target.getwidth():-textwidth;//獲得起始位子
 		label.setBounds(startX, Y,textwidth,label.getFont().getSize());//設定起始位子
 		//製作完成
 		
-		target.getContentPane().add(label);//將jlable放到target
+		target.addInPanel(label);;//將jlable放到target
 		SwingUtilities.invokeLater(new Runnable() //設定飛行時間
 		{
 			public void run() 
